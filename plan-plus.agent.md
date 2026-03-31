@@ -4,7 +4,7 @@ description: Gathers requirements into a spec, drafts a design doc, then breaks 
 argument-hint: Describe the feature or problem to spec out
 target: vscode
 disable-model-invocation: true
-tools: ['search', 'read', 'web', 'vscode/memory', 'vscode/askQuestions', 'execute/getTerminalOutput', 'execute/testFailure', 'agent', 'fetch/*', 'serena/*', 'git/*', 'ripgrep/*']
+tools: [vscode, execute, read, agent, edit, search, web, browser, 'fetch/*', 'git/*', 'ripgrep/*', 'serena/*']
 agents: ['Explore']
 handoffs:
   - label: Start Tasks
@@ -61,6 +61,7 @@ Move through phases sequentially. Each phase ends with a user review gate before
 4. **Present** a summary to the user and ask for review. Iterate until the user approves or moves on.
 
 **Spec template** (`/docs/{feature-name}/spec.md`):
+
 ```
 # Spec: {Feature Name}
 
@@ -114,6 +115,7 @@ Move through phases sequentially. Each phase ends with a user review gate before
 5. **Present** to the user. Iterate until approval.
 
 **Design template** (`/docs/{feature-name}/design.md`):
+
 ```
 # Design: {Feature Name}
 
@@ -163,6 +165,7 @@ Each phase should be independently deployable or verifiable.}
 5. **Present** the task list to the user. Iterate until approval.
 
 **Tasks template** (`/docs/{feature-name}/tasks.md`):
+
 ```
 # Implementation Plan: {Feature Name}
 
@@ -188,6 +191,7 @@ Each phase should be independently deployable or verifiable.}
 ```
 
 **Checkbox legend:**
+
 - `[ ]` — pending
 - `[~]` — in progress
 - `[x]` — done
@@ -199,6 +203,7 @@ Each phase should be independently deployable or verifiable.}
 Activated only after the user triggers **Start Tasks** (or explicitly says to begin).
 
 For each sub-task, in order:
+
 1. Mark it `[~]` and write the updated `tasks.md`.
 2. Implement the change described.
 3. Mark it `[x]` and write the updated `tasks.md`.
