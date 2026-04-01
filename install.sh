@@ -24,7 +24,12 @@ PROMPT_FILE="$PROMPTS_DIR/generate-steering.prompt.md"
 mkdir -p "$COPILOT_AGENT_DIR" "$PROMPTS_DIR"
 
 # Determine source: local vs GitHub remote
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# `${BASH_SOURCE[0]}` may be unset in some shells, so fallback to `$0`.
+script_source="${BASH_SOURCE[0]:-$0}"
+if [[ -z "$script_source" ]]; then
+  script_source="$0"
+fi
+SCRIPT_DIR="$(cd "$(dirname "$script_source")" && pwd)"
 LOCAL_AGENTS_DIR="$SCRIPT_DIR/agents"
 LOCAL_PROMPT_FILE="$SCRIPT_DIR/prompts/generate-steering.prompt.md"
 
