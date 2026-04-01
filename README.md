@@ -160,14 +160,19 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 
 ### Windows PowerShell (no clone, one-liner)
 
-If using PowerShell 7+ (pwsh):
+If using PowerShell 7+ (`pwsh`):
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.ps1' -UseBasicParsing | iex"
+pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.ps1' | iex"
 ```
 
 If using Windows PowerShell 5.1 (classic):
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.ps1' -UseBasicParsing | iex"
+```
+
+If you’re not sure which PowerShell you have, run:
+```powershell
+$PSVersionTable.PSVersion
 ```
 
 ### What it installs

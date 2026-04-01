@@ -14,7 +14,18 @@ $repoRawBase = 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main'
 $profileHome = [Environment]::GetFolderPath('UserProfile')
 $copilotDir = Join-Path $profileHome '.copilot\agents'
 
-if ($IsWindows) {
+# Determine whether running on Windows in a cross-version way
+if ([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)) {
+  $isWindowsPlatform = $true
+} elseif ($PSVersionTable -and $PSVersionTable.Platform -eq 'Win32NT') {
+  $isWindowsPlatform = $true
+} elseif ($env:OS -eq 'Windows_NT') {
+  $isWindowsPlatform = $true
+} else {
+  $isWindowsPlatform = $false
+}
+
+if ($isWindowsPlatform) {
   $appData = [Environment]::GetFolderPath('ApplicationData')
   if ([string]::IsNullOrWhiteSpace($appData)) {
     $appData = Join-Path $profileHome 'AppData\Roaming'
