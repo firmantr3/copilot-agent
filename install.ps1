@@ -10,8 +10,9 @@ $ErrorActionPreference = 'Stop'
 
 $repoRawBase = 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main'
 
-$home = [Environment]::GetFolderPath('UserProfile')
-$copilotDir = Join-Path $home '.copilot\agents'
+# Avoid `HOME` name collision with PS read-only automatic variable in some shells
+$profileHome = [Environment]::GetFolderPath('UserProfile')
+$copilotDir = Join-Path $profileHome '.copilot\agents'
 $appData = [Environment]::GetFolderPath('ApplicationData')
 $promptsDir = Join-Path $appData 'Code\User\prompts'
 $promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
