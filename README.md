@@ -190,6 +190,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubu
 3. Prompt in natural terms what you are planning to build, then iterate until you reach a complete `tasks.md` (or the task list step).
 4. Once tasks are stable, switch to an efficient lower-cost model (e.g., “0x/low”) before executing code generation to save premium calls.
 
+![App screenshot](assets/image.png)
+
 ### Plan Plus
 
 - Can be used immediately as the primary planning agent.
