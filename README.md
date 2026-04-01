@@ -127,6 +127,77 @@ After answering questions, ask Copilot:
 
 ---
 
+## Install (Windows/macOS/Linux)
+
+This repository includes an OS-aware installer at:
+
+- `install.sh` (macOS/Linux)
+- `install.ps1` (Windows PowerShell)
+
+### macOS / Linux (local clone)
+
+```bash
+git clone https://github.com/firmantr3/copilot-agent.git
+cd copilot-agent
+bash ./install.sh
+```
+
+### macOS / Linux (no clone, one-liner)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.sh | bash
+# or
+wget -qO- https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.sh | bash
+```
+
+### Windows PowerShell (local clone)
+
+```powershell
+git clone https://github.com/firmantr3/copilot-agent.git
+cd copilot-agent
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+### Windows PowerShell (no clone, one-liner)
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.ps1' -UseBasicParsing | iex"
+```
+
+### What it installs
+
+- `agents/*` files → `~/.copilot/agents/` on macOS/Linux and `%USERPROFILE%\.copilot\agents` on Windows
+- `prompts/generate-steering.prompt.md` →
+  - macOS: `~/Library/Application Support/Code/User/prompts/generate-steering.prompt.md`
+  - Linux: `~/.config/Code/User/prompts/generate-steering.prompt.md`
+  - Windows: `%APPDATA%\Code\User\prompts\generate-steering.prompt.md`
+
+### Troubleshooting
+
+- Ensure `curl` or `wget` is installed on macOS/Linux.
+- Ensure PowerShell execution policy allows script execution (`Bypass` in example).
+
+## Using the agents
+
+1. Start a new Copilot Chat session for your feature or bug request.
+2. Use a higher-capability (“thinking/high”) model first to generate robust planning output.
+3. Prompt in natural terms what you are planning to build, then iterate until you reach a complete `tasks.md` (or the task list step).
+4. Once tasks are stable, switch to an efficient lower-cost model (e.g., “0x/low”) before executing code generation to save premium calls.
+
+### Plan Plus
+
+- Can be used immediately as the primary planning agent.
+- Focus on getting a clear spec, design, and task list in one session.
+
+### Plan Kiro
+
+- Kiro-style process requires steering generation first.
+- In chat, run the command `/generate-steering`.
+- Allow the agent to create `.kiro/steering/product.md`, `.kiro/steering/structure.md`, and `.kiro/steering/tech.md`.
+- After steering exists, use `Plan Kiro` for optimized plan generation.
+
+> Disclaimer: This workflow and templates are currently tested on TypeScript projects. Other languages may require adjustments in prompts and task expectations.
+
 ## Tips
 
 - Put constraints up front (language/framework, database, hosting, “no new dependencies”, etc.).

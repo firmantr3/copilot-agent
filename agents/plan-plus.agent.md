@@ -8,15 +8,15 @@ tools: [vscode, execute, read, agent, edit, search, web, browser, 'fetch/*', 'gi
 agents: ['Explore']
 handoffs:
   - label: Start Tasks
-    agent: agent
+    agent: "Plan Plus"
     prompt: 'Begin executing tasks from tasks.md one by one, updating each checkbox as you go.'
     send: true
   - label: Revise Spec
-    agent: agent
+    agent: "Plan Plus"
     prompt: 'Re-open spec.md and ask the user what to revise.'
     send: false
   - label: Revise Design
-    agent: agent
+    agent: "Plan Plus"
     prompt: 'Re-open design.md and ask the user what to revise.'
     send: false
 ---
