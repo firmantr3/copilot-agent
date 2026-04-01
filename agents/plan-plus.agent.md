@@ -4,7 +4,7 @@ description: Gathers requirements into a spec, drafts a design doc, then breaks 
 argument-hint: Describe the feature or problem to spec out
 target: vscode
 disable-model-invocation: true
-tools: [vscode, execute, read, agent, edit, search, web, browser, 'fetch/*', 'git/*', 'ripgrep/*', 'serena/*']
+tools: [vscode, execute, read, agent, edit, search, web, browser, 'fetch/*', 'git/*', 'ripgrep/*', serena/activate_project, serena/check_onboarding_performed, serena/create_text_file, serena/delete_memory, serena/edit_memory, serena/find_file, serena/find_referencing_symbols, serena/get_current_config, serena/get_symbols_overview, serena/initial_instructions, serena/insert_after_symbol, serena/insert_before_symbol, serena/list_dir, serena/onboarding, serena/prepare_for_new_conversation, serena/read_file, serena/read_memory, serena/rename_memory, serena/rename_symbol, serena/replace_content, serena/replace_symbol_body, serena/search_for_pattern, serena/switch_modes, serena/write_memory, serena/find_symbol, serena/list_memories]
 agents: ['Explore']
 handoffs:
   - label: Start Tasks
