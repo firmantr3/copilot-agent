@@ -13,9 +13,18 @@ $repoRawBase = 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main'
 # Avoid `HOME` name collision with PS read-only automatic variable in some shells
 $profileHome = [Environment]::GetFolderPath('UserProfile')
 $copilotDir = Join-Path $profileHome '.copilot\agents'
-$appData = [Environment]::GetFolderPath('ApplicationData')
-$promptsDir = Join-Path $appData 'Code\User\prompts'
-$promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
+
+if ($IsWindows) {
+  $appData = [Environment]::GetFolderPath('ApplicationData')
+  if ([string]::IsNullOrWhiteSpace($appData)) {
+    $appData = Join-Path $profileHome 'AppData\Roaming'
+  }
+  $promptsDir = Join-Path $appData 'Code\User\prompts'
+  $promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
+} else {
+  $promptsDir = Join-Path $profileHome '.config/Code/User/prompts'
+  $promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
+}
 
 New-Item -ItemType Directory -Force -Path $copilotDir | Out-Null
 New-Item -ItemType Directory -Force -Path $promptsDir | Out-Null
@@ -34,7 +43,7 @@ function Download-File($url, $dest) {
   }
 }
 
-if (Test-Path $localAgentsDir -PathType Container -and Test-Path $localPrompt -PathType Leaf) {
+if ((Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPrompt -PathType Leaf)) {
   Write-Host "Using local repository files from $currentDir"
   Get-ChildItem -Path $localAgentsDir -Filter '*.md' | ForEach-Object {
     Copy-Item -Path $_.FullName -Destination $copilotDir -Force
