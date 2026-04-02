@@ -23,7 +23,7 @@ handoffs:
   - label: 🚀 Start Tasks
     agent: "Execute Kiro"
     prompt:
-      "Begin executing tasks from the `.kiro/specs/{feature-name}/tasks.md` we just generated. Please read the generated tasks.md, mark [~] before starting a sub-task, and [x] when done. Pause for user confirmation between top-level tasks."
+      "Begin executing tasks from the `tasks.md` we just generated. Please read the generated tasks.md, mark [~] before starting a sub-task, and [x] when done. Pause for user confirmation between top-level tasks."
     send: true
   - label: 📝 Open in Editor
     agent: agent
