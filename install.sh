@@ -44,13 +44,20 @@ PROMPT_FILES=(
 
 download_file() {
   local url=$1 dest=$2
-  if command -v curl >/dev/null 2>&1; then
-    curl -fsSL "$url" -o "$dest"
-  elif command -v wget >/dev/null 2>&1; then
-    wget -qO "$dest" "$url"
-  else
-    error "curl or wget is required to download files from remote"
-  fi
+  local retries=3
+  local count=0
+  while [ $count -lt $retries ]; do
+    if command -v curl >/dev/null 2>&1; then
+      if curl -fsSL "$url" -o "$dest"; then return 0; fi
+    elif command -v wget >/dev/null 2>&1; then
+      if wget -qO "$dest" "$url"; then return 0; fi
+    else
+      error "curl or wget is required to download files from remote"
+    fi
+    count=$((count + 1))
+    [ $count -lt $retries ] && sleep 1
+  done
+  error "Failed to download $url after $retries attempts"
 }
 
 if [[ -f "$SCRIPT_DIR/install.sh" && -d "$LOCAL_AGENTS_DIR" && -d "$LOCAL_PROMPTS_DIR" ]]; then
