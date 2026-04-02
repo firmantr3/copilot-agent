@@ -42,7 +42,7 @@ $currentDir = Get-Location
 $localAgentsDir = Join-Path $currentDir.Path 'agents'
 $localPromptsDir = Join-Path $currentDir.Path 'prompts'
 
-$agentFiles = @('plan-kiro.agent.md', 'plan-plus.agent.md')
+$agentFiles = @('plan-kiro.agent.md', 'plan-plus.agent.md', 'execute-kiro.agent.md')
 $promptFiles = @('generate-steering.prompt.md', 'update-steering.prompt.md')
 
 function Download-File($url, $dest) {

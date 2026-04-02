@@ -34,6 +34,7 @@ LOCAL_PROMPTS_DIR="$SCRIPT_DIR/prompts"
 AGENT_FILES=(
   "plan-kiro.agent.md"
   "plan-plus.agent.md"
+  "execute-kiro.agent.md"
 )
 
 PROMPT_FILES=(
