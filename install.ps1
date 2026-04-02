@@ -38,9 +38,9 @@ if ($isWindowsPlatform) {
 New-Item -ItemType Directory -Force -Path $copilotDir | Out-Null
 New-Item -ItemType Directory -Force -Path $promptsDir | Out-Null
 
-$currentDir = Get-Location
-$localAgentsDir = Join-Path $currentDir.Path 'agents'
-$localPromptsDir = Join-Path $currentDir.Path 'prompts'
+$scriptDir = $PSScriptRoot
+$localAgentsDir = if ($scriptDir) { Join-Path $scriptDir 'agents' } else { '' }
+$localPromptsDir = if ($scriptDir) { Join-Path $scriptDir 'prompts' } else { '' }
 
 $agentFiles = @('plan-kiro.agent.md', 'plan-plus.agent.md', 'execute-kiro.agent.md')
 $promptFiles = @('generate-steering.prompt.md', 'update-steering.prompt.md')
@@ -53,8 +53,8 @@ function Download-File($url, $dest) {
   }
 }
 
-if ((Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPromptsDir -PathType Container)) {
-  Write-Host "Using local repository files from $currentDir"
+if ($scriptDir -and (Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPromptsDir -PathType Container)) {
+  Write-Host "Using local repository files from $scriptDir"
   Get-ChildItem -Path $localAgentsDir -Filter '*.md' | ForEach-Object {
     Copy-Item -Path $_.FullName -Destination $copilotDir -Force
     Write-Host "Copied $($_.Name) -> $copilotDir"

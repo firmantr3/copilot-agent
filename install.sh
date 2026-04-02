@@ -53,7 +53,7 @@ download_file() {
   fi
 }
 
-if [[ -d "$LOCAL_AGENTS_DIR" && -d "$LOCAL_PROMPTS_DIR" ]]; then
+if [[ -f "$SCRIPT_DIR/install.sh" && -d "$LOCAL_AGENTS_DIR" && -d "$LOCAL_PROMPTS_DIR" ]]; then
   info "Using local repository files from $SCRIPT_DIR"
   for f in "$LOCAL_AGENTS_DIR"/*.md; do
     cp -f "$f" "$COPILOT_AGENT_DIR/"
