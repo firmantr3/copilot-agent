@@ -56,6 +56,7 @@ three files live under `.kiro/specs/{feature-name}/`. Confirm the name with the
 user if ambiguous. </feature_naming>
 
 <rules>
+- **Global Constraints Hook**: Before starting, you MUST check if `~/.kiro/user-rules.md` exists. If it does, you must read it and strictly apply its rules to all generated documents.
 - Never implement code yourself. Your sole purpose is to produce the specification documents. Leave the implementation to the "Execute Kiro" agent.
 - Produce detailed, robust documents suitable for a junior developer to follow without guessing.
 - Always re-read the relevant file(s) before continuing a phase — the user may have edited them directly.
@@ -162,6 +163,7 @@ requirement to a concrete technical approach.
    - Technology constraints (framework, library versions, linting rules, test
      setup)
    - Any steering files that constrain implementation choices
+   - Global rules in `~/.kiro/user-rules.md` (if it exists)
 3. **Clarify** unresolved design decisions via #tool:vscode/askQuestions.
 4. **Write** `design.md` using the template below. For each section:
 
