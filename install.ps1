@@ -3,12 +3,12 @@ PowerShell installer for copilot-agent templates (Windows / CLI).
 Usage:
   pwsh -NoProfile -ExecutionPolicy Bypass -File ./install.ps1
   or remote:
-  pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main/install.ps1' -UseBasicParsing | iex"
+  pwsh -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://cdn.jsdelivr.net/gh/firmantr3/copilot-agent@main/install.ps1' -UseBasicParsing | iex"
 #>
 
 $ErrorActionPreference = 'Stop'
 
-$repoRawBase = 'https://raw.githubusercontent.com/firmantr3/copilot-agent/main'
+$repoRawBase = 'https://cdn.jsdelivr.net/gh/firmantr3/copilot-agent@main'
 
 # Avoid `HOME` name collision with PS read-only automatic variable in some shells
 $profileHome = [Environment]::GetFolderPath('UserProfile')

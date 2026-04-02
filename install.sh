@@ -4,7 +4,7 @@ set -euo pipefail
 # cross-platform installer for copilot-agent templates
 # (supports local repo copy + remote install via curl/wget)
 
-REPO_RAW_BASE="https://raw.githubusercontent.com/firmantr3/copilot-agent/main"
+REPO_RAW_BASE="https://cdn.jsdelivr.net/gh/firmantr3/copilot-agent@main"
 
 info() { printf "[INFO] %s\n" "$*"; }
 error() { printf "[ERROR] %s\n" "$*" >&2; exit 1; }
