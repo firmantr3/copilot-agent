@@ -31,10 +31,8 @@ if ($isWindowsPlatform) {
     $appData = Join-Path $profileHome 'AppData\Roaming'
   }
   $promptsDir = Join-Path $appData 'Code\User\prompts'
-  $promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
 } else {
   $promptsDir = Join-Path $profileHome '.config/Code/User/prompts'
-  $promptFile = Join-Path $promptsDir 'generate-steering.prompt.md'
 }
 
 New-Item -ItemType Directory -Force -Path $copilotDir | Out-Null
@@ -42,9 +40,10 @@ New-Item -ItemType Directory -Force -Path $promptsDir | Out-Null
 
 $currentDir = Get-Location
 $localAgentsDir = Join-Path $currentDir.Path 'agents'
-$localPrompt = Join-Path $currentDir.Path 'prompts\generate-steering.prompt.md'
+$localPromptsDir = Join-Path $currentDir.Path 'prompts'
 
 $agentFiles = @('plan-kiro.agent.md', 'plan-plus.agent.md')
+$promptFiles = @('generate-steering.prompt.md', 'update-steering.prompt.md')
 
 function Download-File($url, $dest) {
   if (Get-Command Invoke-WebRequest -ErrorAction SilentlyContinue) {
@@ -54,14 +53,16 @@ function Download-File($url, $dest) {
   }
 }
 
-if ((Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPrompt -PathType Leaf)) {
+if ((Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPromptsDir -PathType Container)) {
   Write-Host "Using local repository files from $currentDir"
   Get-ChildItem -Path $localAgentsDir -Filter '*.md' | ForEach-Object {
     Copy-Item -Path $_.FullName -Destination $copilotDir -Force
     Write-Host "Copied $($_.Name) -> $copilotDir"
   }
-  Copy-Item -Path $localPrompt -Destination $promptFile -Force
-  Write-Host "Copied generate-steering.prompt.md -> $promptFile"
+  foreach ($f in $promptFiles) {
+    Copy-Item -Path (Join-Path $localPromptsDir $f) -Destination (Join-Path $promptsDir $f) -Force
+    Write-Host "Copied $f -> $promptsDir"
+  }
 } else {
   Write-Host "Local repo files not found; downloading from GitHub"
   foreach ($f in $agentFiles) {
@@ -70,10 +71,14 @@ if ((Test-Path $localAgentsDir -PathType Container) -and (Test-Path $localPrompt
     Download-File -url $url -dest $dest
     Write-Host "Downloaded $f -> $dest"
   }
-  Download-File -url ("$repoRawBase/prompts/generate-steering.prompt.md") -dest $promptFile
-  Write-Host "Downloaded generate-steering.prompt.md -> $promptFile"
+  foreach ($f in $promptFiles) {
+    $url = "$repoRawBase/prompts/$f"
+    $dest = Join-Path $promptsDir $f
+    Download-File -url $url -dest $dest
+    Write-Host "Downloaded $f -> $dest"
+  }
 }
 
 Write-Host "Installation completed."
 Write-Host "Agents path: $copilotDir"
-Write-Host "Prompt path: $promptFile"
+Write-Host "Prompts path: $promptsDir"
