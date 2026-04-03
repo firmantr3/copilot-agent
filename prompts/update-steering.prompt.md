@@ -11,10 +11,10 @@ Explore the current project and update the existing steering documents under `.k
 
 Before making any changes, gather context by reading:
 - The existing steering documents under `.kiro/steering/`
-- `package.json` — dependencies, scripts, project name
-- `tsconfig.json` — TypeScript configuration and strictness settings
+- Manifest files (e.g., `package.json`, `pyproject.toml`) — dependencies, scripts, project name
+- Config files (e.g., `tsconfig.json`) — language configuration and strictness settings
 - `README.md` — project description and overview (if present)
-- `src/` directory tree — understand module layout and naming
+- Source directory tree (e.g., `src/`, `app/`) — understand module layout and naming
 - Main entry points and recently added modules
 
 Identify discrepancies between the current codebase and what is documented in the steering files.
@@ -34,15 +34,15 @@ Update `.kiro/steering/tech.md` to reflect:
 - Framework or runtime updates.
 - New database, ORM, caching, or background job systems.
 - External services that were added or removed.
-- Updates in development tools or common commands (from `package.json`).
-- Path aliases changes in `tsconfig.json`.
+- Updates in development tools or common commands.
+- Module resolution or path aliases changes.
 
 Ensure any version modifications are exact.
 
 ## Step 4: Update `structure.md`
 
 Update `.kiro/steering/structure.md` to capture:
-- Changes in Type Safety rules or observed codebase practices.
+- Changes in Language-Level/Type Safety rules or observed codebase practices.
 - Updates to the Core Directory Structure and Feature Module patterns.
 - New file placement rules or naming conventions.
 - Emerging architecture patterns (e.g., changes in the Repository, Service, or Route patterns).

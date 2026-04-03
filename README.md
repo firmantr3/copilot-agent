@@ -50,8 +50,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubu
 3. @-mention your preferred planning agent (`@plan-plus` or `@plan-kiro`) and describe what you want to build.
    - Example: `@plan-kiro Add a new dark mode toggle to the navbar`
 4. The agent will formulate questions, gather context, and draft the Spec, Design, and Tasks. Review and approve the documents.
-5. Once `tasks.md` is complete, use the **🚀 Start Tasks** handoff button, or explicitly @-mention `@execute-kiro` to begin implementation.
-   - When executing tasks, switch to an efficient, fast model for cost-efficiency.
+5. Once `tasks.md` is complete, use the **🚀 Start Tasks** handoff button to begin implementation.
+   - This button automatically delegates execution to the `@execute-kiro` agent. 
+   - `@execute-kiro` is configured by default to use rapid, cost-efficient models (like Raptor mini or GPT-4.1), allowing it to immediately power through the generated task list at high speed.
+   - Alternatively, you can explicitly @-mention `@execute-kiro` in a new chat.
 
 ![App screenshot](assets/image.png)
 
@@ -71,7 +73,7 @@ All agents check for a `~/.kiro/user-rules.md` file globally. If it exists, they
 ### Project-Specific Rules
 For `@plan-kiro` and `@plan-plus`, you can add constraints to a `.kiro/steering/` directory inside your specific project. They will read any Markdown files in this directory to inform design and architectural decisions.
 
-> *Disclaimer: This workflow and templates are currently tested heavily on TypeScript/React projects. Other languages may require slight prompt adjustments in your custom rules hook.*
+> The agents auto-detect your project's language and tech stack. TypeScript is the most battle-tested, but the templates are designed to work with any language. Use `~/.kiro/user-rules.md` to add language-specific constraints if needed.
 
 ---
 

@@ -10,12 +10,12 @@ Explore the current project and generate three steering documents under `.kiro/s
 ## Step 1: Explore the Project
 
 Before writing anything, gather context by reading:
-- `package.json` — dependencies, scripts, project name
-- `tsconfig.json` — TypeScript configuration and strictness settings
+- Look for manifest files (`package.json`, `pyproject.toml`, `Cargo.toml`, etc.) — to understand dependencies and project metadata.
+- Config files (`tsconfig.json`, `setup.cfg`, etc.) — to understand language configuration and strictness settings.
 - `README.md` — project description and overview (if present)
-- `src/` directory tree — understand module layout and naming
-- `src/index.ts` or main entry point — see how the app is composed
-- `src/shared/database/schema/` — understand domain entities
+- Source directory tree (e.g., `src/`, `app/`, `lib/`) — understand module layout and naming
+- Main entry point — see how the app is composed
+- Domain models/schemas — understand domain entities
 - Any existing docs in `docs/` — additional context about architecture and features
 
 Do not skip this step. The quality of the steering documents depends on your understanding of the actual codebase.
@@ -60,8 +60,8 @@ Create `.kiro/steering/tech.md` using this template:
 ## Runtime & Framework
 
 - **Runtime**: {runtime and key characteristics}
-- **Framework**: {web framework and notable traits}
-- **Language**: {language and notable config, e.g. strict mode}
+- **Framework**: {web/app framework and notable traits}
+- **Language**: {primary language(s) and notable config, e.g., TypeScript strict mode}
 
 ## Database & ORM
 
@@ -85,7 +85,7 @@ Create `.kiro/steering/tech.md` using this template:
 
 ## Development Tools
 
-- **Package Manager**: {package manager}
+- **Package/Dependency Manager**: {package manager}
 - **Testing**: {test runner and strategy}
 - **API Documentation**: {API doc generation tool if present}
 - **Local Services**: {local infrastructure approach, e.g. Docker Compose}
@@ -112,9 +112,9 @@ Create `.kiro/steering/tech.md` using this template:
 {key build/start commands}
 ```
 
-## Path Aliases
+## Module Resolution & Aliases
 
-{List configured TypeScript path aliases from tsconfig.json}
+{List configured path aliases, e.g., from `tsconfig.json`, or module resolution rules}
 ```
 
 Guidelines:
@@ -134,9 +134,9 @@ inclusion: always
 
 # Project Structure & Architecture Patterns
 
-## Type Safety
+## Language-Level Safety & Linting
 
-{Describe the TypeScript strictness policy — what is forbidden and what is required. Base this on tsconfig.json settings and observed patterns in the codebase.}
+{Describe the strictness policy, e.g., TypeScript strict mode, Python mypy rules, or Rust clippy config. What is forbidden and what is required. Base this on config files and observed code patterns.}
 
 ### Forbidden Practices
 - ❌ {practice that violates type safety}
@@ -167,7 +167,7 @@ inclusion: always
 
 ## Module File Pattern
 
-Each feature module follows this structure:
+Detect and document the actual module file pattern from the codebase. For example:
 
 ```
 src/modules/{module}/{feature}/
@@ -177,6 +177,7 @@ src/modules/{module}/{feature}/
 ├── {feature}.dto.ts         # {description}
 └── {feature}.test.ts        # {description}
 ```
+*(Adapt the extension and structure to match the project's actual language and architecture)*
 
 ## Critical Architecture Patterns
 
@@ -200,13 +201,13 @@ src/modules/{module}/{feature}/
 - **Constants**: {convention}
 - **Database tables**: {convention}
 
-## Import Patterns
+## Import & Module Resolution Patterns
 
-{Show the preferred import style using path aliases vs relative imports, with correct/incorrect examples.}
+{Show the preferred import style using path aliases vs relative imports, or package imports, with correct/incorrect examples.}
 
 ## Database Schema Organization
 
-{List schema files under src/shared/database/schema/ and what domain each covers.}
+{List schema files and their locations, and what domain each covers.}
 
 ## Testing Patterns
 
@@ -224,8 +225,8 @@ src/modules/{module}/{feature}/
 Guidelines:
 - The `inclusion: always` frontmatter ensures this file is always loaded into agent context
 - Use actual import paths from the codebase in examples, not placeholders
-- Base the "Forbidden/Required" type safety section on both `tsconfig.json` and observed code patterns
-- Reproduce the real directory tree from `src/` rather than inventing structure
+- Base the "Forbidden/Required" safety section on both config files (e.g., `tsconfig.json`) and observed code patterns
+- Reproduce the real directory tree rather than inventing structure
 
 ## Step 5: Verify
 

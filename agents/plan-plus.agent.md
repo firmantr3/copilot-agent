@@ -57,6 +57,7 @@ Move through phases sequentially. Each phase ends with a user review gate before
    - Existing related features, patterns, or domain terminology
    - Data models, APIs, or UI components that will be affected
    - Any open GitHub issues or PRs related to the feature
+   - *Review `~/.copilot/firmantr3/explore-checklist.md` for comprehensive exploration steps.*
 2. **Clarify** — use #tool:vscode/askQuestions to resolve ambiguities about scope, actors, constraints, and success criteria before writing.
 3. **Write** `spec.md` using the spec template below.
 4. **Present** a summary to the user and ask for review. Iterate until the user approves or moves on.
@@ -109,8 +110,9 @@ Move through phases sequentially. Each phase ends with a user review gate before
 1. **Re-read** `spec.md` in full — the user may have amended it.
 2. **Discover** — launch an *Explore* subagent to gather:
    - File and folder conventions in the codebase
-   - Relevant existing utilities, hooks, components, or services to reuse
+   - Relevant existing utilities, abstractions (e.g. hooks, components for React/TS), or services to reuse
    - Technology constraints (framework versions, linting rules, test setup)
+   - *Review `~/.copilot/firmantr3/explore-checklist.md` for language-specific structures to investigate.*
 3. **Clarify** unresolved design questions via #tool:vscode/askQuestions.
 4. **Write** `design.md` using the design template below.
 5. **Present** to the user. Iterate until approval.

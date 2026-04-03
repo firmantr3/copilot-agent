@@ -84,6 +84,7 @@ every user story and its acceptance criteria in EARS notation.
    - Data models, APIs, or services the feature will touch
    - Any open GitHub issues or PRs related to the feature
    - Relevant steering files (`.kiro/steering/`) that constrain the design
+   - *Review `~/.copilot/firmantr3/explore-checklist.md` for comprehensive exploration steps.*
 2. **Clarify** — use #tool:vscode/askQuestions to ask targeted questions about:
 
    - Who are the actors / personas?
@@ -159,20 +160,20 @@ requirement to a concrete technical approach.
 2. **Explore** — launch an _Explore_ subagent to gather:
 
    - File and folder conventions used in the codebase
-   - Existing utilities, hooks, components, services, or schemas to reuse
+   - Existing utilities, abstractions (e.g., hooks, components), services, or schemas to reuse
    - Technology constraints (framework, library versions, linting rules, test
      setup)
    - Any steering files that constrain implementation choices
    - Global rules in `~/.kiro/user-rules.md` (if it exists)
+   - *Review `~/.copilot/firmantr3/explore-checklist.md` for language-specific structures to investigate.*
 3. **Clarify** unresolved design decisions via #tool:vscode/askQuestions.
 4. **Write** `design.md` using the template below. For each section:
 
-   - **Components and Interfaces** — document TypeScript interfaces and method
-     signatures for every major component; include a minimal usage example.
+   - **Components and Interfaces** — document interfaces/contracts and function signatures using the project's primary language (e.g., TypeScript interfaces); include a minimal usage example.
    - **Correctness Properties** — derive formal testable properties directly
      from acceptance criteria; each property must reference its Req ID(s).
    - **Testing Strategy** — plan both unit tests AND property-based tests (min
-     100 iterations each, using `fast-check` or equivalent); include skeleton
+     100 iterations each, using the ecosystem equivalent, e.g., `fast-check` for TS, `hypothesis` for Python); include skeleton
      test code referencing property numbers.
    - **Migration Strategy** — if replacing an existing system, describe a phased
      rollout with a rollback plan; omit for greenfield.
@@ -242,19 +243,19 @@ greenfield features.}
 ## Components and Interfaces
 
 {For each major component, document its interface — not its implementation.
-Include TypeScript signatures and a brief usage example.}
+Include signatures in the project's primary language (e.g., TypeScript) and a brief usage example.}
 
 ### {Component Name}
 
 #### {Interface / Class}
 
-```typescript
-{Key interface or class definition — method signatures only, no bodies.}
-````
+```<language>
+{Key interface or class definition — method signatures only, no bodies. Keep TypeScript as the default if unspecified.}
+```
 
 #### Usage Example
 
-```typescript
+```<language>
 {Minimal example showing how a caller uses this component.}
 ```
 
@@ -305,9 +306,10 @@ UI → User: success state
 
 ## Error Handling
 
-{Failure modes, error classes, response format.}
+{Failure modes, error classes, response format. Use the project's idiomatic error handling pattern.}
 
-```typescript
+```<language>
+// Example in TypeScript/JS
 class {FeatureError} extends Error { ... }
 ```
 
@@ -339,15 +341,18 @@ _For any_ {input condition}, the system should {expected behavior}.
 
 ## Testing Strategy
 
+## Testing Strategy
+
 ### Dual Testing Approach
 
 **Unit Tests** — specific examples, edge cases, and integration points.
 **Property Tests** — verify universal properties across randomized inputs
-(minimum 100 iterations per property, using `fast-check` or equivalent).
+(minimum 100 iterations per property, using a framework like `fast-check` for TS, `hypothesis` for Python, etc.).
 
 ### Unit Test Focus Areas
 
-```typescript
+```<language>
+// Example in TypeScript / Jest syntax
 describe('{Area}', () => {
   it('{behavior}', () => { ... });
 });
@@ -355,10 +360,11 @@ describe('{Area}', () => {
 
 ### Property-Based Test Examples
 
-```typescript
+```<language>
 /**
  * Feature: {feature-name}, Property {N}: {Short title}
  */
+// Example using fast-check (TS)
 test("{description}", async () => {
   await fc.assert(
     fc.asyncProperty(...generators, async (...inputs) => {
