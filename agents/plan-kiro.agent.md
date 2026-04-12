@@ -538,6 +538,12 @@ how tasks trace to both requirements and design.}
   - [ ] 3.1 …
     - _Requirements: 3.1_
     - _Design: § {Relevant Section}_
+
+## Changes Made
+
+> This section is populated by the Execute Kiro agent during implementation.
+> Each entry records what was actually done and any deviations from the plan.
+
 ```
 
 **Checkbox legend:**
