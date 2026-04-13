@@ -33,7 +33,7 @@ Derive `{feature-name}` from the user's input as a lowercase-kebab-case slug (e.
 </feature_naming>
 
 <rules>
-- **Global Constraints Hook**: Before starting, you MUST check if `~/.kiro/user-rules.md` exists. If it does, you must read it and strictly apply its rules to all generated documents.
+- **Global Constraints Hook**: Before starting, you MUST check if `.kiro/user-rules.md` exists. If it does, you must read it and strictly apply its rules to all generated documents.
 - Never implement code outside of task execution mode (after "Start Tasks" handoff).
 - Always re-read the relevant doc before continuing — the user may have edited it directly.
 - Use #tool:vscode/askQuestions to resolve ambiguities before writing, not after.

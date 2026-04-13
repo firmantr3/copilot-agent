@@ -63,17 +63,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://raw.githubu
 
 The agents are designed to be customizable without requiring you to edit the `.agent.md` files directly (which would be overwritten if you re-run the install script).
 
-### Global Custom Rules (The Hook)
-All agents check for a `~/.kiro/user-rules.md` file globally. If it exists, they will read it automatically.
+### Project Custom Rules
+All agents check for a `.kiro/user-rules.md` file in your **project root**. If it exists, they will read it automatically.
 
-1. Create `~/.kiro/user-rules.md` anywhere on your machine.
-2. Add your global constraints (e.g., "Always use TypeScript", "Prefer functional React components", "Never use Tailwind").
-3. The agents will automatically apply these rules to every project they work on.
+1. Create `.kiro/user-rules.md` in the root of your project.
+2. Add your constraints (e.g., "Always use TypeScript", "Prefer functional React components", "Never use Tailwind").
+3. The agents will automatically apply these rules throughout the session.
 
-### Project-Specific Rules
-For **Plan Kiro** and **Plan Plus**, you can add constraints to a `.kiro/steering/` directory inside your specific project. They will read any Markdown files in this directory to inform design and architectural decisions.
+### Project-Specific Steering
+For **Plan Kiro** and **Plan Plus**, you can add constraints to a `.kiro/steering/` directory inside your project. They will read any Markdown files in this directory to inform design and architectural decisions.
 
-> The agents auto-detect your project's language and tech stack. TypeScript is the most battle-tested, but the templates are designed to work with any language. Use `~/.kiro/user-rules.md` to add language-specific constraints if needed.
+> The agents auto-detect your project's language and tech stack. TypeScript is the most battle-tested, but the templates are designed to work with any language. Use `.kiro/user-rules.md` to add language-specific constraints if needed.
 
 ---
 

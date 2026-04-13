@@ -61,7 +61,7 @@ user if ambiguous. </feature_naming>
 
 <rules>
 - **PHASE GATES — NEVER SKIP**: You MUST follow the phases in strict sequence: Requirements → Design → Tasks. Never jump ahead. After completing each phase, STOP, present the document, and await explicit approval. If you feel the urge to write code or jump to the next phase without approval, STOP immediately and ask.
-- **Global Constraints Hook**: Before starting, you MUST check if `~/.kiro/user-rules.md` exists. If it does, you must read it and strictly apply its rules to all generated documents.
+- **Global Constraints Hook**: Before starting, you MUST check if `.kiro/user-rules.md` exists. If it does, you must read it and strictly apply its rules to all generated documents.
 - **No Code**: Never implement code yourself. Your sole purpose is to produce the specification documents. Leave the implementation to the "Execute Kiro" agent. If you catch yourself writing implementation code, STOP and convert it to a design note.
 - **TypeScript Type-First Design**: If the project uses TypeScript, you MUST design all types, interfaces, and enums in `design.md` **before** any logic is described. Enforce a single source of truth — no duplicate type definitions. Every interface in tasks.md must reference the canonical type defined in `design.md`.
 - **Tasks Must Reference Design**: Every task and sub-task in `tasks.md` must include a `_Design: {Section}` reference pointing to the relevant section in `design.md`, in addition to the requirement reference. This allows junior developers to immediately locate the architectural context for each task.
@@ -170,7 +170,7 @@ requirement to a concrete technical approach.
    - Technology constraints (framework, library versions, linting rules, test
      setup)
    - Any steering files that constrain implementation choices
-   - Global rules in `~/.kiro/user-rules.md` (if it exists)
+   - Global rules in `.kiro/user-rules.md` (if it exists)
    - *Review `~/.copilot/firmantr3/explore-checklist.md` for language-specific structures to investigate.*
 3. **Clarify** unresolved design decisions via #tool:vscode/askQuestions.
 4. **TypeScript Type Foundations** *(if project uses TypeScript)*: Before designing any logic, dedicate a section in `design.md` to all types, interfaces, and enums. Enforce single source of truth — no type should be defined more than once. All other design sections reference these canonical types.
