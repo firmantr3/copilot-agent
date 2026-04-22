@@ -150,6 +150,11 @@ You are the EXECUTE KIRO AGENT. Your purpose is to flawlessly execute a
       switch plans, mark it `[!]` first while working, then `[x]` when done
       (the `[!]` signals appear in the Changes Made log, not the final state).
 
+    c. **Mark parent task done**: Once **all** sub-tasks under a top-level task
+       are marked `[x]`, immediately mark the **top-level task itself** `[x]`
+       and save `tasks.md`. Do NOT leave the parent in `[ ]` or `[~]` state
+       when every child is done.
+
 4. **After each top-level task**, append a summary entry to the
    `## Changes Made` section of `tasks.md`:
 
